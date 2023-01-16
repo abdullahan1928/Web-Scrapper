@@ -28,46 +28,18 @@ def navigateToHome():
 
 def launchBrowser():
     wait = WebDriverWait(driver, 10)
-    userName = wait.until(EC.element_to_be_clickable(
-        (By.NAME, 'session_key')))
-    password = wait.until(EC.element_to_be_clickable(
-        (By.NAME, 'session_password')))
-    # signInBtn = wait.until(EC.element_to_be_clickable(
-    #     (By.CLASS_NAME, 'sign-in-form__submit-button')))
+    username = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='username']")))
+    password = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='password']")))
 
-    userName.send_keys(inq.answers['username'])
+    username.clear()
+    username.send_keys(inq.answers['username'])
+
+    password.clear()
     password.send_keys(inq.answers['password'])
-    password.send_keys(Keys.ENTER)
 
-    # Navigate to home page
-    searchBox = wait.until(EC.element_to_be_clickable(
-        (By.CLASS_NAME, 'search-global-typeahead__input')))
-    searchBox.send_keys('jamshaid khalid')
-    searchBox.send_keys(Keys.ENTER)
-    idLink = wait.until(EC.element_to_be_clickable(
-        (By.CLASS_NAME, 'entity-result__title-text')))
-    idLink.click()
+    Login_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']"))).click()
 
-    # name = parser.findAll('h1', attrs={'class': 'text-heading-xlarge'})[0]
-    # details = parser.findAll('div', attrs={'class': 'text-body-medium'})[0]
-
-    # parser = BeautifulSoup(driver.page_source, 'html.parser')
-
-    # app = parser.find('div', attrs={'class': 'application-outlet'})
-    # app = app.find('main', attrs={'id': 'main'})
-    # print(app)
-    # name = app.findAll('h1', attrs={'class': 'text-heading-xlarge'})
-    # details = app.findAll('div')
-
-    # print('-----------------Name-----------------')
-    # print(name)
-    # print(details)
-
-    # ex.ws.cell(row=2, column=1,
-    #            value=str(name))
-    # ex.ws.cell(row=2,
-    #            column=2, value=str(details))
-
+    
     ex.wb.save("sample.xlsx")
     ct.calc_total_time()
 
