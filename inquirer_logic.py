@@ -9,6 +9,10 @@ questions = [
                   message="What's your username?",
                   validate=lambda _, x: len(x) > 0,
                   ),
+    inquirer.Text('password',
+                  message="What's your username?",
+                  validate=lambda _, x: len(x) > 0,
+                  ),
 ]
 
 answers = inquirer.prompt(questions)
